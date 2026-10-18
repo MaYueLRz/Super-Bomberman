@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://1wngbpj62mim"]
+
+[ext_resource type="Script" uid="uid://cw48coqgjh7v3" path="res://bomberman.gd" id="1_3uo7q"]
+[ext_resource type="Texture2D" uid="uid://icfngt20x5gd" path="res://bomberman_quieto_transparente.png" id="2_fhfjk"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fm685"]
+radius = 92.63
+height = 308.3
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ejw18"]
+atlas = ExtResource("2_fhfjk")
+region = Rect2(0, 0, 180, 288)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_idbjj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ejw18")
+}],
+"loop": 1,
+"name": &"quieto",
+"speed": 5.0
+}]
+
+[node name="CharacterBody2D" type="CharacterBody2D" unique_id=250880131]
+script = ExtResource("1_3uo7q")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2123539960]
+shape = SubResource("CapsuleShape2D_fm685")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=267662967]
+sprite_frames = SubResource("SpriteFrames_idbjj")
+animation = &"quieto"
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1529627586]
