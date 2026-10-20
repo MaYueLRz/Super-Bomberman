@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://icfngt20x5gd"
-path="res://.godot/imported/bomberman_quieto_transparente.png-4d4bde23ea92a7e5d6aae88c2f8c10d2.ctex"
+uid="uid://bb52yr8s045bn"
+path="res://.godot/imported/borde_arriba.png-642e9d88eb41a262e3bc9b779d01b502.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://bomberman_quieto_transparente.png"
-dest_files=["res://.godot/imported/bomberman_quieto_transparente.png-4d4bde23ea92a7e5d6aae88c2f8c10d2.ctex"]
+source_file="res://assets/tiles/borde_arriba.png"
+dest_files=["res://.godot/imported/borde_arriba.png-642e9d88eb41a262e3bc9b779d01b502.ctex"]
 
 [params]
 

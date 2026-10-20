@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://bhrmi2li8ic0m"]
+
+[ext_resource type="Script" uid="uid://dgas21oip2h24" path="res://mapa.gd" id="1_2jh14"]
+[ext_resource type="Texture2D" uid="uid://dg34nxgl66bsr" path="res://assets/tiles/arena_fondo.png" id="2_70f7c"]
+[ext_resource type="PackedScene" uid="uid://1wngbpj62mim" path="res://bomberman.tscn" id="2_lrjei"]
+
+[node name="mapa" type="Node2D" unique_id=2002814679]
+script = ExtResource("1_2jh14")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=878925121]
+scale = Vector2(4, 4)
+texture = ExtResource("2_70f7c")
+centered = false
+
+[node name="distribucion" type="Node2D" parent="." unique_id=553404089]
+
+[node name="bomberman" parent="." unique_id=250880131 instance=ExtResource("2_lrjei")]
