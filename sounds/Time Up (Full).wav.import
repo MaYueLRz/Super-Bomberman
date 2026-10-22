@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://yqkje86p6b3b"
+path="res://.godot/imported/Time Up (Full).wav-509c1232b10a5630c4a79776acc2d949.sample"
+
+[deps]
+
+source_file="res://sounds/Time Up (Full).wav"
+dest_files=["res://.godot/imported/Time Up (Full).wav-509c1232b10a5630c4a79776acc2d949.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

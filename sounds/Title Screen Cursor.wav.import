@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://fgcjgu2ihiva"
+path="res://.godot/imported/Title Screen Cursor.wav-da597e7e5aa9c40d504f51913ec06e98.sample"
+
+[deps]
+
+source_file="res://sounds/Title Screen Cursor.wav"
+dest_files=["res://.godot/imported/Title Screen Cursor.wav-da597e7e5aa9c40d504f51913ec06e98.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

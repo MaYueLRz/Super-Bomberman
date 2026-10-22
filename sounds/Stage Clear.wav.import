@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://btk5jmuhxftqa"
+path="res://.godot/imported/Stage Clear.wav-6f3396c7a9c511b4270c858d6bd4e517.sample"
+
+[deps]
+
+source_file="res://sounds/Stage Clear.wav"
+dest_files=["res://.godot/imported/Stage Clear.wav-6f3396c7a9c511b4270c858d6bd4e517.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

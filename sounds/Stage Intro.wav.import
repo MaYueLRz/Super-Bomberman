@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://txqb3lswdmmh"
+path="res://.godot/imported/Stage Intro.wav-bc2956a2ef65042b4286aa33b787c23c.sample"
+
+[deps]
+
+source_file="res://sounds/Stage Intro.wav"
+dest_files=["res://.godot/imported/Stage Intro.wav-bc2956a2ef65042b4286aa33b787c23c.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

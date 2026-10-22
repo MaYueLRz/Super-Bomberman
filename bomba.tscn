@@ -49,7 +49,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="bomba" type="Area2D" unique_id=940010041]
+[node name="bomba" type="Area2D" unique_id=940010041 groups=["bomba"]]
 script = ExtResource("1_jlaks")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=549031652]
