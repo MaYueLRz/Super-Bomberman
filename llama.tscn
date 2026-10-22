@@ -1,0 +1,85 @@
+[gd_scene format=3 uid="uid://c73ufe5vbx43x"]
+
+[ext_resource type="Script" uid="uid://cnbkyy8ovgspk" path="res://llama.gd" id="1_l2lbc"]
+[ext_resource type="Texture2D" uid="uid://ccd42vfmq1tgs" path="res://assets/llama_centro.png" id="2_1n77j"]
+[ext_resource type="Texture2D" uid="uid://5sk8344mhajw" path="res://assets/llama_cuerpo_h.png" id="3_lb611"]
+[ext_resource type="Texture2D" uid="uid://srs5bv1e7jox" path="res://assets/llama_cuerpo_v.png" id="4_gbmqh"]
+[ext_resource type="Texture2D" uid="uid://b4avjbwhi0b3o" path="res://assets/llama_punta_h.png" id="5_tcwri"]
+[ext_resource type="Texture2D" uid="uid://bjep5uomq57pl" path="res://assets/llama_punta_v.png" id="6_l3cg2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gbmqh"]
+atlas = ExtResource("2_1n77j")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tyss7"]
+atlas = ExtResource("3_lb611")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mnhjw"]
+atlas = ExtResource("4_gbmqh")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y2xhr"]
+atlas = ExtResource("5_tcwri")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b5x6v"]
+atlas = ExtResource("6_l3cg2")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mivf0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gbmqh")
+}],
+"loop": 1,
+"name": &"llama_centro",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tyss7")
+}],
+"loop": 1,
+"name": &"llama_cuerpo_h",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mnhjw")
+}],
+"loop": 1,
+"name": &"llama_cuerpo_v",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y2xhr")
+}],
+"loop": 1,
+"name": &"llama_punta_h",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b5x6v")
+}],
+"loop": 1,
+"name": &"llama_punta_v",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mivf0"]
+size = Vector2(64, 64)
+
+[node name="llama" type="Area2D" unique_id=182230717]
+script = ExtResource("1_l2lbc")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1682854831]
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_mivf0")
+animation = &"llama_centro"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=874333171]
+shape = SubResource("RectangleShape2D_mivf0")

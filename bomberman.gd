@@ -1,9 +1,10 @@
 extends CharacterBody2D
 
+var bomba_escena = preload("res://bomba.tscn")
 
 const CELDA = 64.0
 
-@export var velocidad = 300.0
+@export var velocidad = 400.0
 @export var fuerza_centrado := 10.0
 @export var ancho_mapa = 704.0  # 11 columnas × 64
 
@@ -24,8 +25,13 @@ func _physics_process(_delta):
 	direccion_actual = leer_direccion()
 	velocity = direccion_actual * velocidad 
 	centrar_en_el_pasillo()
+	if Input.is_action_just_pressed("Place_bomb"):
+		var bomba = bomba_escena.instantiate()
+		bomba.position = centro_de_celda(position)
+		get_parent().add_child(bomba)
 	move_and_slide()
 	animar()
+
 
 func leer_direccion() -> Vector2:
 	if Input.is_action_pressed("move_up"):

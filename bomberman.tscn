@@ -164,5 +164,5 @@ shape = SubResource("RectangleShape2D_fhfjk")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=267662967]
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_idbjj")
-animation = &"caminar_abajo"
+animation = &"quieto"
 offset = Vector2(0, -4)

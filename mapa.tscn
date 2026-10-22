@@ -1,11 +1,17 @@
 [gd_scene format=3 uid="uid://bhrmi2li8ic0m"]
 
 [ext_resource type="Script" uid="uid://dgas21oip2h24" path="res://mapa.gd" id="1_2jh14"]
+[ext_resource type="PackedScene" uid="uid://b5ek3h6in1nbv" path="res://bomba.tscn" id="2_5d3jg"]
 [ext_resource type="Texture2D" uid="uid://dg34nxgl66bsr" path="res://assets/tiles/arena_fondo.png" id="2_70f7c"]
 [ext_resource type="PackedScene" uid="uid://1wngbpj62mim" path="res://bomberman.tscn" id="2_lrjei"]
+[ext_resource type="PackedScene" uid="uid://c73ufe5vbx43x" path="res://llama.tscn" id="3_wan0n"]
 
-[node name="mapa" type="Node2D" unique_id=2002814679]
+[node name="mapa" type="Node2D" unique_id=2002814679 groups=["mapa"]]
 script = ExtResource("1_2jh14")
+
+[node name="bomba" parent="." unique_id=940010041 instance=ExtResource("2_5d3jg")]
+
+[node name="llama" parent="." unique_id=182230717 instance=ExtResource("3_wan0n")]
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=878925121]
 scale = Vector2(4, 4)
