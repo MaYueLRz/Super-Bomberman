@@ -4,43 +4,44 @@ var bomba_escena = preload("res://bomba.tscn")
 
 const CELDA = 64.0
 
-@export var velocidad = 400.0
+@export var velocidad = 250.0
 @export var fuerza_centrado := 10.0
-@export var ancho_mapa = 704.0  # 11 columnas × 64
+@export var vidas: int = 3
 
 var direccion_actual = Vector2.ZERO
-
 var inicio = Vector2.ZERO
 var muriendo = false
+var es_invulnerable = false
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 
-
-
 func _ready():
 	inicio = position
-
+	add_to_group("bomberman")
+	dar_invulnerabilidad()
 
 func _physics_process(_delta):
+	if muriendo:
+		return
+
 	direccion_actual = leer_direccion()
 	velocity = direccion_actual * velocidad 
 	centrar_en_el_pasillo()
-	if Input.is_action_just_pressed("Place_bomb"):
-		var bomba = bomba_escena.instantiate()
-		bomba.position = centro_de_celda(position)
-		get_parent().add_child(bomba)
+
+	if Input.is_action_just_pressed("Place_bomb") or Input.is_action_just_pressed("ui_accept"):
+		poner_bomba()
+
 	move_and_slide()
 	animar()
 
-
 func leer_direccion() -> Vector2:
-	if Input.is_action_pressed("move_up"):
+	if Input.is_action_pressed("move_up") or Input.is_action_pressed("ui_up"):
 		return Vector2.UP
-	if Input.is_action_pressed("move_down"):
+	if Input.is_action_pressed("move_down") or Input.is_action_pressed("ui_down"):
 		return Vector2.DOWN
-	if Input.is_action_pressed("move_left"):
+	if Input.is_action_pressed("move_left") or Input.is_action_pressed("ui_left"):
 		return Vector2.LEFT
-	if Input.is_action_pressed("move_right"):
+	if Input.is_action_pressed("move_right") or Input.is_action_pressed("ui_right"):
 		return Vector2.RIGHT
 	return Vector2.ZERO
 
@@ -54,19 +55,87 @@ func centrar_en_el_pasillo() -> void:
 	elif direccion_actual.y != 0.0:
 		velocity.x = clamp((centro.x - position.x) * fuerza_centrado, -velocidad, velocidad)
 
+func poner_bomba() -> void:
+	if bomba_escena:
+		var bomba = bomba_escena.instantiate()
+		bomba.position = centro_de_celda(position)
+		get_parent().add_child(bomba)
+
 func animar() -> void:
 	if direccion_actual == Vector2.ZERO:
-		sprite.pause()
-		sprite.frame = 1
+		if sprite.sprite_frames and sprite.sprite_frames.has_animation("quieto"):
+			sprite.play("quieto")
+		else:
+			sprite.pause()
+			sprite.frame = 1
 		return
+		
 	var animacion := "caminar_abajo"
 	if direccion_actual == Vector2.UP:
 		animacion = "caminar_arriba"
-	if direccion_actual == Vector2.DOWN:
+	elif direccion_actual == Vector2.DOWN:
 		animacion = "caminar_abajo"
-	if direccion_actual == Vector2.LEFT:
+	elif direccion_actual == Vector2.LEFT:
 		animacion = "caminar_izquierda"
-	if direccion_actual == Vector2.RIGHT:
+	elif direccion_actual == Vector2.RIGHT:
 		animacion = "caminar_derecha"
-	if sprite.animation != animacion or not sprite.is_playing():
-		sprite.play(animacion)
+		
+	if sprite.sprite_frames and sprite.sprite_frames.has_animation(animacion):
+		if sprite.animation != animacion or not sprite.is_playing():
+			sprite.play(animacion)
+
+func recibir_dano():
+	morir()
+
+func morir() -> void:
+	if muriendo or es_invulnerable:
+		return
+	
+	muriendo = true
+	vidas -= 1
+	velocity = Vector2.ZERO
+	direccion_actual = Vector2.ZERO
+	print("¡Bomberman fue alcanzado! Vidas restantes: ", vidas)
+
+	# Opacidad normal para ver la animación
+	sprite.modulate = Color.WHITE
+
+	# Reproducir la animación 'morir' que está en tu editor
+	if sprite and sprite.sprite_frames and sprite.sprite_frames.has_animation("morir"):
+		sprite.play("morir")
+		await sprite.animation_finished
+	else:
+		await get_tree().create_timer(0.8).timeout
+
+	if vidas > 0:
+		reaparecer()
+	else:
+		print("¡GAME OVER!")
+
+func reaparecer() -> void:
+	position = inicio
+	velocity = Vector2.ZERO
+	direccion_actual = Vector2.ZERO
+	muriendo = false
+	
+	# Colocar estado quieto al reaparecer
+	if sprite and sprite.sprite_frames and sprite.sprite_frames.has_animation("quieto"):
+		sprite.play("quieto")
+	elif sprite and sprite.sprite_frames and sprite.sprite_frames.has_animation("caminar_abajo"):
+		sprite.play("caminar_abajo")
+		sprite.frame = 1
+		sprite.pause()
+		
+	dar_invulnerabilidad()
+
+func dar_invulnerabilidad() -> void:
+	es_invulnerable = true
+	
+	var tween = create_tween().set_loops(3)
+	tween.tween_property(sprite, "modulate:a", 0.3, 0.2)
+	tween.tween_property(sprite, "modulate:a", 1.0, 0.2)
+	
+	await tween.finished
+	if sprite:
+		sprite.modulate = Color.WHITE
+	es_invulnerable = false

@@ -5,13 +5,16 @@
 [ext_resource type="Texture2D" uid="uid://dg34nxgl66bsr" path="res://assets/tiles/arena_fondo.png" id="2_70f7c"]
 [ext_resource type="PackedScene" uid="uid://1wngbpj62mim" path="res://bomberman.tscn" id="2_lrjei"]
 [ext_resource type="PackedScene" uid="uid://c73ufe5vbx43x" path="res://llama.tscn" id="3_wan0n"]
+[ext_resource type="PackedScene" uid="uid://cl3xvbwfpod8g" path="res://jefe.tscn" id="6_wan0n"]
 
 [node name="mapa" type="Node2D" unique_id=2002814679 groups=["mapa"]]
 script = ExtResource("1_2jh14")
 
 [node name="bomba" parent="." unique_id=940010041 instance=ExtResource("2_5d3jg")]
+position = Vector2(-96, 31)
 
 [node name="llama" parent="." unique_id=182230717 instance=ExtResource("3_wan0n")]
+position = Vector2(-63, 89)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=878925121]
 scale = Vector2(4, 4)
@@ -21,3 +24,7 @@ centered = false
 [node name="distribucion" type="Node2D" parent="." unique_id=553404089]
 
 [node name="bomberman" parent="." unique_id=250880131 instance=ExtResource("2_lrjei")]
+
+[node name="jefe" parent="." unique_id=239099230 instance=ExtResource("6_wan0n")]
+position = Vector2(486, 176)
+up_direction = Vector2(0, 1)

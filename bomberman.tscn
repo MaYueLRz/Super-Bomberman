@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cw48coqgjh7v3" path="res://bomberman.gd" id="1_3uo7q"]
 [ext_resource type="Texture2D" uid="uid://0ytkympy1jfn" path="res://assets/bomberman_walk.png" id="2_fhfjk"]
+[ext_resource type="Texture2D" uid="uid://4vwmyqk6ntky" path="res://assets/bomberman_muerte.png" id="3_ejw18"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fhfjk"]
 size = Vector2(44, 44)
@@ -69,6 +70,30 @@ region = Rect2(0, 72, 16, 24)
 [sub_resource type="AtlasTexture" id="AtlasTexture_xo0qf"]
 atlas = ExtResource("2_fhfjk")
 region = Rect2(16, 72, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jn7ni"]
+atlas = ExtResource("3_ejw18")
+region = Rect2(0, 0, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l6yuw"]
+atlas = ExtResource("3_ejw18")
+region = Rect2(16, 0, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3pap3"]
+atlas = ExtResource("3_ejw18")
+region = Rect2(32, 0, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a8bjd"]
+atlas = ExtResource("3_ejw18")
+region = Rect2(48, 0, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ajcvw"]
+atlas = ExtResource("3_ejw18")
+region = Rect2(64, 0, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u6mgp"]
+atlas = ExtResource("3_ejw18")
+region = Rect2(80, 0, 16, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_maeie"]
 atlas = ExtResource("2_fhfjk")
@@ -146,6 +171,29 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_jn7ni")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l6yuw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3pap3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a8bjd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ajcvw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u6mgp")
+}],
+"loop": 0,
+"name": &"morir",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_maeie")
 }],
 "loop": 1,
@@ -164,5 +212,5 @@ shape = SubResource("RectangleShape2D_fhfjk")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=267662967]
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_idbjj")
-animation = &"quieto"
+animation = &"morir"
 offset = Vector2(0, -4)
