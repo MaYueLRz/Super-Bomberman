@@ -1,7 +1,10 @@
 extends CharacterBody2D
 
 var bomba_escena = preload("res://bomba.tscn")
-
+var sfx_poner_bomba = preload("res://sounds/Place Bomb.wav")
+var sfx_muerte = preload("res://sounds/Bomberman Dies.wav")
+var sfx_paso = preload("res://sounds/Walking 1.wav")
+var tiempo_paso := 0.0
 const CELDA = 64.0
 
 @export var velocidad = 250.0
@@ -14,16 +17,26 @@ var muriendo = false
 var es_invulnerable = false
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
-
+@onready var reproductor_audio = $AudioStreamPlayer2D if has_node("AudioStreamPlayer2D") else null
 func _ready():
 	inicio = position
 	add_to_group("bomberman")
 	dar_invulnerabilidad()
-
+func sonar(stream: AudioStream):
+	if stream:
+		if reproductor_audio:
+			reproductor_audio.stream = stream
+			reproductor_audio.play()
+		else:
+			var player = AudioStreamPlayer.new()
+			player.stream = stream
+			get_tree().root.add_child(player)
+			player.play()
+			player.finished.connect(player.queue_free)
 func _physics_process(_delta):
 	if muriendo:
 		return
-
+	
 	direccion_actual = leer_direccion()
 	velocity = direccion_actual * velocidad 
 	centrar_en_el_pasillo()
@@ -60,6 +73,7 @@ func poner_bomba() -> void:
 		var bomba = bomba_escena.instantiate()
 		bomba.position = centro_de_celda(position)
 		get_parent().add_child(bomba)
+		sonar(sfx_poner_bomba)
 
 func animar() -> void:
 	if direccion_actual == Vector2.ZERO:
@@ -96,7 +110,7 @@ func morir() -> void:
 	velocity = Vector2.ZERO
 	direccion_actual = Vector2.ZERO
 	print("¡Bomberman fue alcanzado! Vidas restantes: ", vidas)
-
+	sonar(sfx_muerte)
 	# Opacidad normal para ver la animación
 	sprite.modulate = Color.WHITE
 

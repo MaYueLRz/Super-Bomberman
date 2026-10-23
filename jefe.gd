@@ -4,7 +4,7 @@ class_name Jefe
 const CELDA = 64.0
 
 @export var velocidad = 50.0
-@export var vida = 5
+@export var vida = 10
 @export var fuerza_centrado = 10.0
 @export var tiempo_entre_ataques = 7.0
 @export var explosion_escena: PackedScene = preload("res://llama.tscn")
@@ -15,7 +15,10 @@ var jugador: Node2D = null
 var muriendo = false
 var atacando = false
 var puede_recibir_dano = true
-
+var sfx_martillo = preload("res://sounds/Bigaron's Hammer.wav")
+var sfx_dano = preload("res://sounds/Enemy Dies.wav")
+var sfx_victoria = preload("res://sounds/Stage Clear.wav")
+@onready var reproductor_audio = $AudioStreamPlayer2D
 @onready var sprite = $AnimatedSprite2D
 @onready var area_martillo = $AreaMartillo if has_node("AreaMartillo") else null
 @onready var colision_martillo = $AreaMartillo/CollisionShape2D if has_node("AreaMartillo/CollisionShape2D") else null
@@ -24,8 +27,6 @@ func _ready():
 	add_to_group("jefe")
 	jugador = get_tree().get_first_node_in_group("bomberman")
 	
-	if jugador == null:
-		print("⚠️ ALERTA: No se encontró al personaje en el grupo 'bomberman'.")
 
 	if colision_martillo:
 		colision_martillo.disabled = true
@@ -36,7 +37,10 @@ func _ready():
 		sprite.play("movimiento")
 	
 	iniciar_ciclo_ataque()
-
+func sonar(stream: AudioStream):
+	if reproductor_audio and stream:
+		reproductor_audio.stream = stream
+		reproductor_audio.play()
 func _physics_process(_delta):
 	if muriendo or atacando:
 		return
@@ -108,7 +112,7 @@ func ejecutar_ataque():
 		
 		await get_tree().create_timer(0.4).timeout
 		if muriendo: return
-		
+		sonar(sfx_martillo)
 		if colision_martillo:
 			colision_martillo.disabled = false
 		
@@ -137,7 +141,7 @@ func recibir_dano(cantidad = 1):
 	vida -= cantidad
 	puede_recibir_dano = false
 	print("Vida del jefe: ", vida)
-
+	sonar(sfx_dano)
 	if sprite.sprite_frames and sprite.sprite_frames.has_animation("muerte"):
 		sprite.play("muerte")
 		sprite.frame = 0
@@ -182,6 +186,7 @@ func morir():
 
 	# FASE 2: Zoom gigante acercándose a la pantalla estilo SNES
 	z_index = 20
+	sonar(sfx_victoria)
 	var duracion_zoom := 1.2
 	var tween = create_tween().set_parallel(true)
 	

@@ -4,7 +4,20 @@ signal golpeo(cuerpo)
 
 @export var duracion := 0.5
 var cuerpos_golpeados: Array = []
+var sfx_explosion = preload("res://sounds/Bomb Explodes.wav")
+@onready var reproductor_audio = $AudioStreamPlayer2D if has_node("AudioStreamPlayer2D") else null
 
+func sonar(stream: AudioStream):
+	if stream:
+		if reproductor_audio:
+			reproductor_audio.stream = stream
+			reproductor_audio.play()
+		else:
+			var player = AudioStreamPlayer.new()
+			player.stream = stream
+			get_tree().root.add_child(player)
+			player.play()
+			player.finished.connect(player.queue_free)
 func preparar(tipo: String, es_punta: bool, direccion: Vector2) -> void:
 	var animacion = "llama_centro"
 	match tipo:
@@ -22,8 +35,7 @@ func preparar(tipo: String, es_punta: bool, direccion: Vector2) -> void:
 
 func _ready() -> void:
 	body_entered.connect(_on_body_entered)
-	
-	# Espera 1 frame para detectar a quienes ya estaban parados sobre la llama
+	sonar(sfx_explosion)
 	await get_tree().process_frame
 	for cuerpo in get_overlapping_bodies():
 		procesar_impacto(cuerpo)

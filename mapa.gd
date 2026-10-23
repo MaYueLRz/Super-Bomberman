@@ -18,11 +18,18 @@ const MAPA = [
 ]
 
 var solido_escena = preload("res://bloque_solido.tscn")
+var sfx_intro = preload("res://sounds/Stage Intro.wav")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	construir()
-
+	reproducir_audio_mapa(sfx_intro)
+func reproducir_audio_mapa(stream: AudioStream):
+	if stream:
+		var player = AudioStreamPlayer.new()
+		player.stream = stream
+		add_child(player)
+		player.play()
 func construir():
 	for fila in MAPA.size():
 		for col in MAPA[fila].length():

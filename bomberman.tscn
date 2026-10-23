@@ -214,3 +214,5 @@ scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_idbjj")
 animation = &"morir"
 offset = Vector2(0, -4)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1197503390]
