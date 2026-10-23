@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 signal sin_vidas
+signal vidas_cambiaron(vidas)
 
 # ==========================================
 # 1. CONSTANTES Y CONFIGURACIÓN
@@ -10,7 +11,7 @@ const CELDA: float = 64.0
 @export_group("Parámetros de Bomberman")
 @export var velocidad: float = 250.0
 @export var fuerza_centrado: float = 10.0
-@export var vidas: int = 1
+@export var vidas: int = 3
 
 
 @export_group("Escenas Recurso")
@@ -145,6 +146,7 @@ func morir() -> void:
 
 	muriendo = true
 	vidas -= 1
+	vidas_cambiaron.emit(vidas)
 	velocity = Vector2.ZERO
 	direccion_actual = Vector2.ZERO
 

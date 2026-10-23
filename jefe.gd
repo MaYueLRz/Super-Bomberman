@@ -1,6 +1,9 @@
 extends CharacterBody2D
 class_name Jefe
 
+signal vida_cambio(vida)
+signal derrotado
+
 # ==========================================
 # 1. CONSTANTES Y CONFIGURACIÓN
 # ==========================================
@@ -162,6 +165,7 @@ func recibir_dano(cantidad: int = 1) -> void:
 		return
 		
 	vida -= cantidad
+	vida_cambio.emit(vida)
 	puede_recibir_dano = false
 	print("Vida del jefe: ", vida)
 
@@ -222,6 +226,7 @@ func morir() -> void:
 		await get_tree().create_timer(0.1).timeout
 
 	await tween.finished
+	derrotado.emit()
 	queue_free()
 
 func generar_explosion_aleatoria() -> void:

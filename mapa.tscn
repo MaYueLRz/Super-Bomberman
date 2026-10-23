@@ -6,7 +6,24 @@
 [ext_resource type="PackedScene" uid="uid://cl3xvbwfpod8g" path="res://jefe.tscn" id="6_wan0n"]
 [ext_resource type="Texture2D" uid="uid://bkikqyyc7qh3f" path="res://assets/game_over_marco.png" id="7_auc41"]
 
+[ext_resource type="Texture2D" path="res://assets/hud_fondo.png" id="8_hudfondo"]
+[ext_resource type="Texture2D" path="res://assets/icono_vida.png" id="9_vida"]
+[ext_resource type="Texture2D" path="res://assets/icono_reloj.png" id="10_reloj"]
+[ext_resource type="FontFile" path="res://assets/hud_font.fnt" id="11_fuente"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fondobarra"]
+bg_color = Color(0.0784314, 0, 0, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.470588, 0.0941176, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rellenobarra"]
+bg_color = Color(0.85, 0.12, 0.05, 1)
+
 [node name="mapa" type="Node2D" unique_id=2002814679 groups=["mapa"]]
+position = Vector2(0, 64)
 script = ExtResource("1_2jh14")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=878925121]
@@ -22,11 +39,126 @@ centered = false
 position = Vector2(486, 176)
 up_direction = Vector2(0, 1)
 
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="Fondo" type="TextureRect" parent="HUD"]
+texture_filter = 1
+scale = Vector2(4, 4)
+texture = ExtResource("8_hudfondo")
+
+[node name="IconoVida" type="TextureRect" parent="HUD"]
+texture_filter = 1
+offset_left = 20.0
+offset_top = 2.0
+offset_right = 36.0
+offset_bottom = 17.0
+scale = Vector2(3, 3)
+texture = ExtResource("9_vida")
+
+[node name="Vidas" type="Label" parent="HUD"]
+texture_filter = 1
+offset_left = 76.0
+offset_top = 8.0
+offset_right = 116.0
+offset_bottom = 44.0
+theme_override_fonts/font = ExtResource("11_fuente")
+theme_override_font_sizes/font_size = 36
+text = "3"
+
+[node name="TxtSC" type="Label" parent="HUD"]
+texture_filter = 1
+offset_left = 124.0
+offset_top = 8.0
+offset_right = 180.0
+offset_bottom = 44.0
+theme_override_fonts/font = ExtResource("11_fuente")
+theme_override_font_sizes/font_size = 36
+text = "SC"
+
+[node name="Puntaje" type="Label" parent="HUD"]
+texture_filter = 1
+offset_left = 188.0
+offset_top = 8.0
+offset_right = 424.0
+offset_bottom = 44.0
+theme_override_fonts/font = ExtResource("11_fuente")
+theme_override_font_sizes/font_size = 36
+text = "000000"
+horizontal_alignment = 2
+
+[node name="IconoReloj" type="TextureRect" parent="HUD"]
+texture_filter = 1
+offset_left = 456.0
+offset_top = 2.0
+offset_right = 472.0
+offset_bottom = 18.0
+scale = Vector2(3, 3)
+texture = ExtResource("10_reloj")
+
+[node name="Tiempo" type="Label" parent="HUD"]
+texture_filter = 1
+offset_left = 516.0
+offset_top = 8.0
+offset_right = 640.0
+offset_bottom = 44.0
+theme_override_fonts/font = ExtResource("11_fuente")
+theme_override_font_sizes/font_size = 36
+text = "0:00"
+
+[node name="TxtJefe" type="Label" parent="HUD"]
+texture_filter = 1
+offset_left = 664.0
+offset_top = 8.0
+offset_right = 780.0
+offset_bottom = 44.0
+theme_override_fonts/font = ExtResource("11_fuente")
+theme_override_font_sizes/font_size = 36
+text = "JEFE"
+
+[node name="BarraJefe" type="ProgressBar" parent="HUD"]
+offset_left = 790.0
+offset_top = 12.0
+offset_right = 936.0
+offset_bottom = 38.0
+theme_override_styles/background = SubResource("StyleBoxFlat_fondobarra")
+theme_override_styles/fill = SubResource("StyleBoxFlat_rellenobarra")
+max_value = 10.0
+value = 10.0
+show_percentage = false
+
+[node name="PanelFinal" type="ColorRect" parent="HUD"]
+visible = false
+offset_top = 330.0
+offset_right = 960.0
+offset_bottom = 570.0
+color = Color(0, 0, 0, 0.75)
+
+[node name="Titulo" type="Label" parent="HUD/PanelFinal"]
+texture_filter = 1
+offset_top = 40.0
+offset_right = 480.0
+offset_bottom = 76.0
+scale = Vector2(2, 2)
+theme_override_fonts/font = ExtResource("11_fuente")
+theme_override_font_sizes/font_size = 36
+text = "¡GANASTE!"
+horizontal_alignment = 1
+
+[node name="Ayuda" type="Label" parent="HUD/PanelFinal"]
+texture_filter = 1
+offset_top = 150.0
+offset_right = 960.0
+offset_bottom = 186.0
+theme_override_fonts/font = ExtResource("11_fuente")
+theme_override_font_sizes/font_size = 36
+text = "ENTER PARA REINICIAR"
+horizontal_alignment = 1
+
 [node name="game_over" type="CanvasLayer" parent="." unique_id=464967935]
 visible = false
 
 [node name="ColorRect" type="ColorRect" parent="game_over" unique_id=649661662]
-custom_minimum_size = Vector2(960, 832)
+custom_minimum_size = Vector2(960, 896)
 offset_right = 40.0
 offset_bottom = 40.0
 color = Color(0, 0, 0, 1)
