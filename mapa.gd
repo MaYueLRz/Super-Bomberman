@@ -40,7 +40,7 @@ func construir():
 				$distribucion.add_child(nodo)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
 
 func hay_solido (posicion: Vector2)->bool:

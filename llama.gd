@@ -7,17 +7,18 @@ var cuerpos_golpeados: Array = []
 var sfx_explosion = preload("res://sounds/Bomb Explodes.wav")
 @onready var reproductor_audio = $AudioStreamPlayer2D if has_node("AudioStreamPlayer2D") else null
 
-func sonar(stream: AudioStream):
-	if stream:
-		if reproductor_audio:
-			reproductor_audio.stream = stream
-			reproductor_audio.play()
-		else:
-			var player = AudioStreamPlayer.new()
-			player.stream = stream
-			get_tree().root.add_child(player)
-			player.play()
-			player.finished.connect(player.queue_free)
+func sonar(stream: AudioStream) -> void:
+	if stream == null:
+		return
+	if reproductor_audio:
+		reproductor_audio.stream = stream
+		reproductor_audio.play()
+	else:
+		var player := AudioStreamPlayer.new()
+		player.stream = stream
+		player.autoplay = true
+		player.finished.connect(player.queue_free)
+		get_tree().root.add_child.call_deferred(player)
 func preparar(tipo: String, es_punta: bool, direccion: Vector2) -> void:
 	var animacion = "llama_centro"
 	match tipo:

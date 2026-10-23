@@ -95,7 +95,7 @@ shape = SubResource("CircleShape2D_xxh3o")
 [node name="AreaMartillo" type="Area2D" parent="." unique_id=1324949078]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AreaMartillo" unique_id=1253814264]
-position = Vector2(0, 243)
+position = Vector2(-2, 173)
 shape = SubResource("RectangleShape2D_xiwp4")
 disabled = true
 

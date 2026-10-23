@@ -2,7 +2,7 @@ extends Area2D
 
 const CELDA = 64.0
 
-@export var rango := 6
+@export var rango := 3
 @export var mecha := 2.0
 
 var llama_escena = preload("res://llama.tscn")
@@ -38,5 +38,5 @@ func crear_llama(destino: Vector2, tipo: String, es_punta: bool, direccion: Vect
 	mapa.add_child(llama)
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
