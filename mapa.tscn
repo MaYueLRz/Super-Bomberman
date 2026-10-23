@@ -1,20 +1,13 @@
 [gd_scene format=3 uid="uid://bhrmi2li8ic0m"]
 
 [ext_resource type="Script" uid="uid://dgas21oip2h24" path="res://mapa.gd" id="1_2jh14"]
-[ext_resource type="PackedScene" uid="uid://b5ek3h6in1nbv" path="res://bomba.tscn" id="2_5d3jg"]
 [ext_resource type="Texture2D" uid="uid://dg34nxgl66bsr" path="res://assets/tiles/arena_fondo.png" id="2_70f7c"]
 [ext_resource type="PackedScene" uid="uid://1wngbpj62mim" path="res://bomberman.tscn" id="2_lrjei"]
-[ext_resource type="PackedScene" uid="uid://c73ufe5vbx43x" path="res://llama.tscn" id="3_wan0n"]
 [ext_resource type="PackedScene" uid="uid://cl3xvbwfpod8g" path="res://jefe.tscn" id="6_wan0n"]
+[ext_resource type="Texture2D" uid="uid://bkikqyyc7qh3f" path="res://assets/game_over_marco.png" id="7_auc41"]
 
 [node name="mapa" type="Node2D" unique_id=2002814679 groups=["mapa"]]
 script = ExtResource("1_2jh14")
-
-[node name="bomba" parent="." unique_id=940010041 instance=ExtResource("2_5d3jg")]
-position = Vector2(-96, 31)
-
-[node name="llama" parent="." unique_id=182230717 instance=ExtResource("3_wan0n")]
-position = Vector2(-63, 89)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=878925121]
 scale = Vector2(4, 4)
@@ -28,3 +21,36 @@ centered = false
 [node name="jefe" parent="." unique_id=239099230 instance=ExtResource("6_wan0n")]
 position = Vector2(486, 176)
 up_direction = Vector2(0, 1)
+
+[node name="game_over" type="CanvasLayer" parent="." unique_id=464967935]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="game_over" unique_id=649661662]
+custom_minimum_size = Vector2(960, 832)
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0, 0, 0, 1)
+
+[node name="TextureRect" type="TextureRect" parent="game_over" unique_id=22281030]
+offset_left = 183.0
+offset_top = 152.0
+offset_right = 381.0
+offset_bottom = 328.0
+scale = Vector2(3, 3)
+texture = ExtResource("7_auc41")
+
+[node name="titulo" type="Label" parent="game_over" unique_id=274752194]
+offset_top = 300.0
+offset_right = 960.6
+offset_bottom = 1260.4
+theme_override_font_sizes/font_size = 48
+text = "Game Over"
+horizontal_alignment = 1
+
+[node name="ayuda" type="Label" parent="game_over" unique_id=1678164387]
+offset_top = 420.0
+offset_right = 959.9999
+offset_bottom = 460.0
+theme_override_font_sizes/font_size = 24
+text = "presiona ENTER para reiniciar"
+horizontal_alignment = 1

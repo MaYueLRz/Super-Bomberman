@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+signal sin_vidas
+
 # ==========================================
 # 1. CONSTANTES Y CONFIGURACIÓN
 # ==========================================
@@ -8,7 +10,8 @@ const CELDA: float = 64.0
 @export_group("Parámetros de Bomberman")
 @export var velocidad: float = 250.0
 @export var fuerza_centrado: float = 10.0
-@export var vidas: int = 3
+@export var vidas: int = 1
+
 
 @export_group("Escenas Recurso")
 @export var bomba_escena: PackedScene = preload("res://bomba.tscn")
@@ -139,27 +142,25 @@ func recibir_dano() -> void:
 func morir() -> void:
 	if muriendo or es_invulnerable:
 		return
-	
+
 	muriendo = true
 	vidas -= 1
 	velocity = Vector2.ZERO
 	direccion_actual = Vector2.ZERO
-	print("¡Bomberman fue alcanzado! Vidas restantes: ", vidas)
 
 	sonar(sfx_muerte)
 	sprite.modulate = Color.WHITE
 
 	if sprite and sprite.sprite_frames and sprite.sprite_frames.has_animation("morir"):
 		sprite.play("morir")
+		await sprite.animation_finished
+	else:
 		await get_tree().create_timer(0.8).timeout
-	elif sprite and sprite.sprite_frames and sprite.sprite_frames.has_animation("muerte"):
-		sprite.play("muerte")
-		await get_tree().create_timer(0.8).timeout
-		
+
 	if vidas > 0:
 		reaparecer()
 	else:
-		print("¡GAME OVER!")
+		sin_vidas.emit()
 
 func reaparecer() -> void:
 	position = inicio

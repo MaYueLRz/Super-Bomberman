@@ -24,6 +24,7 @@ var sfx_intro = preload("res://sounds/Stage Intro.wav")
 func _ready() -> void:
 	construir()
 	reproducir_audio_mapa(sfx_intro)
+	$bomberman.sin_vidas.connect(_on_bomberman_sin_vidas)
 func reproducir_audio_mapa(stream: AudioStream):
 	if stream:
 		var player = AudioStreamPlayer.new()
@@ -57,3 +58,13 @@ func _on_llama_golpeo(cuerpo):
 		print("bomberman se quemo") #aqui iria lo de quitar la vida
 	elif cuerpo.is_in_group("jefe"):
 		print("el jefe se quemo") #aqui va lo de bajarle la vida al jefe
+
+func _on_bomberman_sin_vidas() -> void:
+	$game_over.visible = true
+	$bomberman.set_physics_process(false)
+	for jefe in get_tree().get_nodes_in_group("jefe"):
+		jefe.set_physics_process(false)
+		
+func _unhandled_input(evento: InputEvent) -> void:
+	if $game_over.visible and evento.is_action_pressed("ui_accept"):
+		get_tree().reload_current_scene()
