@@ -85,9 +85,9 @@ func hay_solido (posicion: Vector2)->bool:
 
 func _on_llama_golpeo(cuerpo):
 	if cuerpo.is_in_group("bomberman"):
-		print("bomberman se quemo") #aqui iria lo de quitar la vida
+		print("bomberman se quemo") 
 	elif cuerpo.is_in_group("jefe"):
-		print("el jefe se quemo") #aqui va lo de bajarle la vida al jefe
+		print("el jefe se quemo") 
 
 func _on_bomberman_vidas_cambiaron(v):
 	vidas = v
